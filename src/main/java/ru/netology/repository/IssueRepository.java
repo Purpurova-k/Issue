@@ -1,10 +1,15 @@
 package ru.netology.repository;
 
 import ru.netology.domain.Issue;
+import ru.netology.util.NotFoundException;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+
 
 public class IssueRepository {
+
     private List<Issue> issues = new ArrayList<>();
 
     // Добавить issue
@@ -79,8 +84,22 @@ public class IssueRepository {
     }
 
 
+    // Найти issue по id
+    public Issue findById(int id) {
+        for (Issue issue : issues) {
+            if (issue.getId() == id) {
+                return issue;
+            }
+        }
+        return null;
+    }
+
+
     // Закрытие issue по id
     public void closeIssue(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException("Issue with id " + id + "is not found");
+        }
         for (Issue issue : issues) {
             if (issue.getId() == id) {
                 issue.setClosed(true);
@@ -91,10 +110,18 @@ public class IssueRepository {
 
     // Открытие issue по id
     public void openIssue(int id) {
+        if (findById(id) == null) {
+            throw new NotFoundException("Issue with id " + id + "is not found");
+        }
         for (Issue issue : issues) {
             if (issue.getId() == id) {
                 issue.setClosed(false);
             }
         }
+    }
+
+    // Вспомогательный метод - добавить все
+    public void saveAll(List<Issue> newIssues) {
+        issues.addAll(newIssues);
     }
 }
