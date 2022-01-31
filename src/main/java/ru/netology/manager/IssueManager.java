@@ -5,10 +5,7 @@ import ru.netology.repository.IssueRepository;
 import ru.netology.util.DateComparator;
 import ru.netology.util.ReverseDateComparator;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class IssueManager {
 
@@ -56,23 +53,19 @@ public class IssueManager {
 
 
     // Отсортировать по дате от новых к более старым
-    public List<Issue> sortIssuesByDate(Comparator<Issue> dateComparator) {
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repo.findAll()) {
-            result.add(issue);
-        }
-        result.sort(dateComparator);
+    public List<Issue> sortIssuesByDate() {
+        List<Issue> result = repo.findAll();
+        Comparator dateComparator = new DateComparator();
+        Collections.sort(result, dateComparator);
         return result;
         }
 
 
     // Отсортировать по дате от старых к более новым
-    public List<Issue> sortIssuesByDateReverse(Comparator<Issue> reverseDateComparator) {
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repo.findAll()) {
-            result.add(issue);
-        }
-        result.sort(reverseDateComparator);
+    public List<Issue> sortIssuesByDateReverse() {
+        List<Issue> result = repo.findAll();
+        Comparator reverseDateComparator = new ReverseDateComparator();
+        Collections.sort(result, reverseDateComparator);
         return result;
     }
 
