@@ -10,7 +10,8 @@ import java.util.*;
 public class IssueManager {
 
     private IssueRepository repo;
-    public IssueManager (IssueRepository repo) {
+
+    public IssueManager(IssueRepository repo) {
         this.repo = repo;
     }
 
@@ -32,12 +33,10 @@ public class IssueManager {
     }
 
 
-
     // Отфильтровать по автору
     public List<Issue> filterIssuesByAuthor(String author) {
         return repo.filterIssuesByAuthor(author);
     }
-
 
 
     // Отфильтровать по тегу
@@ -52,7 +51,6 @@ public class IssueManager {
     }
 
 
-
     // Отсортировать по дате от новых к более старым
     public List<Issue> sortIssuesByDate() {
         List<Issue> result = new ArrayList<>();
@@ -62,7 +60,7 @@ public class IssueManager {
         DateComparator dateComparator = new DateComparator();
         Collections.sort(result, dateComparator);
         return result;
-        }
+    }
 
 
     // Отсортировать по дате от старых к более новым

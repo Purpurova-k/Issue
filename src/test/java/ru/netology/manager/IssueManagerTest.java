@@ -54,7 +54,7 @@ class IssueManagerTest {
         List<Issue> returned = List.of(first, second, third, forth, fifth, sixth);
         doReturn(returned).when(repo).findAll();
 
-        manager.addAll(returned);
+//        manager.addAll(returned);
 
         List<Issue> expected = List.of(first, second, third, forth, fifth, sixth);
         List<Issue> actual = manager.getAll();
